@@ -1,9 +1,10 @@
-package br.com.nerdops.api_nerdops.models;
+package br.com.nerdops.api_nerdops.models.comment;
 
+import br.com.nerdops.api_nerdops.models.user.User;
+import br.com.nerdops.api_nerdops.models.post.Post;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,27 +12,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Entity(name = "Post")
-@Table(name = "posts")
+@Entity(name = "Comment")
+@Table(name = "comments")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class Comment {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    private String title;
-
-    @NotBlank
-    private String describe;
+    private String content;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date created_in;
 
-    @NotNull
-    private String user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 }
