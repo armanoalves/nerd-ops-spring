@@ -37,4 +37,8 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+    public void update(CommentUpdateDTO dto) {
+        this.content = dto.content();
+    }
 }

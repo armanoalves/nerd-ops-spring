@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("user")
 public class UserController {
@@ -33,13 +31,13 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<UserListDTO>> listar(@PageableDefault(size = 10, sort={"name"}) Pageable pageable) {
+    public ResponseEntity<Page<UserListDTO>> list(@PageableDefault(size = 10, sort={"name"}) Pageable pageable) {
         var page = repository.findAllByAtivoTrue(pageable).map(UserListDTO::new);
         return ResponseEntity.ok(page);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity listarPorID(@PathVariable Long id) {
+    public ResponseEntity listById(@PathVariable Long id) {
         var user = repository.getReferenceById(id);
         return ResponseEntity.ok(new UserDetalsDTO(user));
     }
