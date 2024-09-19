@@ -12,6 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("post")
 public class PostController {
@@ -55,5 +59,28 @@ public class PostController {
     public ResponseEntity delete(@PathVariable Long id) {
         repository.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> findByPostNameOrUserName(@RequestBody PostSearchDTO dto) {
+        Optional<?> result = postService.postSearch(dto);
+
+        if (result.isPresent()) {
+            Object value = result.get();
+
+            if (value instanceof Post) {
+                Post post = (Post) value;
+                return ResponseEntity.ok(new PostDetalsDTO(post));
+            } else if (value instanceof List) {
+                List<Post> posts = (List<Post>) value;
+
+                List<PostDetalsDTO> postDto = posts.stream()
+                        .map(PostDetalsDTO::new).collect(Collectors.toList());
+
+                return ResponseEntity.ok(postDto);
+            }
+        }
+
+        return ResponseEntity.badRequest().body("Nenhum resultado encontrado");
     }
 }

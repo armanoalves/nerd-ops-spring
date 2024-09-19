@@ -19,9 +19,6 @@ public class CommentService {
     @Autowired
     private PostRepository postRepository;
 
-    @Autowired
-    private CommentRepository commentRepository;
-
     public Comment commentCreate(CommentCreateDTO dto) {
 
         if(!userRepository.existsById(dto.userId())) {
