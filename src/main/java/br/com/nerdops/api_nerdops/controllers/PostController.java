@@ -2,6 +2,7 @@ package br.com.nerdops.api_nerdops.controllers;
 
 import br.com.nerdops.api_nerdops.models.post.*;
 import br.com.nerdops.api_nerdops.repositories.PostRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("post")
+@SecurityRequirement(name = "bearer-key")
 public class PostController {
 
     @Autowired

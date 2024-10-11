@@ -2,6 +2,7 @@ package br.com.nerdops.api_nerdops.controllers;
 
 import br.com.nerdops.api_nerdops.models.comment.*;
 import br.com.nerdops.api_nerdops.repositories.CommentRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("comment")
+@SecurityRequirement(name = "bearer-key")
 public class CommetController {
 
     @Autowired

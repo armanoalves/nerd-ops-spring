@@ -2,6 +2,7 @@ package br.com.nerdops.api_nerdops.controllers;
 
 import br.com.nerdops.api_nerdops.models.user.*;
 import br.com.nerdops.api_nerdops.repositories.UserRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
+@SecurityRequirement(name = "bearer-key")
 public class UserController {
 
     @Autowired

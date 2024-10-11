@@ -1,8 +1,6 @@
 package br.com.nerdops.api_nerdops.models.comment;
 
-import br.com.nerdops.api_nerdops.controllers.CommentSearchDTO;
 import br.com.nerdops.api_nerdops.models.ValidacaoException;
-import br.com.nerdops.api_nerdops.repositories.CommentRepository;
 import br.com.nerdops.api_nerdops.repositories.PostRepository;
 import br.com.nerdops.api_nerdops.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
